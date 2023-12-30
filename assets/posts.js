@@ -5,22 +5,8 @@ const wrapper = document.getElementById("posts-wrapper");
 const urlParams = new URLSearchParams(window.location.search);
 let userId = urlParams.get("userId");
 
-console.log("userId", userId);
-
-console.log(window.location.origin);
-
-async function getPosts(uId) {
-if (!uId || uId === "") {
-    const userId = prompt("Lütfen geçerli bir userId girin: ");
-    const parsedUserId = parseInt(userId);
-    if (parsedUserId < 11 && parsedUserId > 0){
-        return (window.location.href = 
-            window.location.origin + "/posts.html?userId=" + parsedUserId);
-    }
-    return getPosts(null);
-}
-
-    const res = await fetch(jsonplaceholder_url + "/posts?userId=" + uId);
+async function getPosts() {
+    const res = await fetch(jsonplaceholder_url + "/posts?userId=" + userId);
     const data = await res.json();
 
     for (const post of data) { 
@@ -37,4 +23,21 @@ if (!uId || uId === "") {
 }
 }
 
-getPosts(userId);
+
+if (!userId || userId === "" || userId > 10 || userId < 1) {
+    const userId = prompt("Lütfen geçerli bir userId girin: ");
+    const parsedUserId = parseInt(userId);
+    if (parsedUserId < 11 && parsedUserId > 0){
+         window.location.href = 
+            window.location.origin + "/posts.html?userId=" + parsedUserId;
+    } else{ 
+     window.location.reload();
+    }
+}
+
+else {
+    getPosts();
+}
+
+
+
