@@ -12,6 +12,7 @@ users_wrapper.innerHTML += `
 <div class="card-body">
 <h5 class="card-title">${user.name}</h5>
 <p class="card-text">${user.company.name}</p>
+<p class="card-text">${user.email}</p>
 </div>
 </div>
 </div>
